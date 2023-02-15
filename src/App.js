@@ -1,23 +1,43 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="categories_container">
+      <div className='category_card'>
+        <img src='' alt='' className='category_card_img' />
+        <div className='category_card_body'>
+          <h2 className='category_card_body-title'>Hats</h2>
+          <p className='category_card_body-subtitle'>Shop Now</p>
+        </div>
+      </div>
+      <div className='category_card'>
+        <img src='' alt='' className='category_card_img' />
+        <div className='category_card_body'>
+          <h2 className='category_card_body-title'>Jacets</h2>
+          <p className='category_card_body-subtitle'>Shop Now</p>
+        </div>
+      </div>
+      <div className='category_card'>
+        <img src='' alt='' className='category_card_img' />
+        <div className='category_card_body'>
+          <h2 className='category_card_body-title'>Sneakers</h2>
+          <p className='category_card_body-subtitle'>Shop Now</p>
+        </div>
+      </div>
+      <div className='category_card'>
+        <img src='' alt='' className='category_card_img' />
+        <div className='category_card_body'>
+          <h2 className='category_card_body-title'>Womens</h2>
+          <p className='category_card_body-subtitle'>Shop Now</p>
+        </div>
+      </div>
+      <div className='category_card'>
+        <img src='' alt='' className='category_card_img' />
+        <div className='category_card_body'>
+          <h2 className='category_card_body-title'>Mens</h2>
+          <p className='category_card_body-subtitle'>Shop Now</p>
+        </div>
+      </div>
     </div>
   );
 }
