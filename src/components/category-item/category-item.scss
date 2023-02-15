@@ -46,13 +46,14 @@
     position: absolute;
 
     .category_card_body-title {
-      font-weight: bold;
-      margin: 0 10px 0;
+      font-weight: bolder;
+      margin: 0 10px 5px;
       font-size: 22px;
       color: #4a4a4a;
     }
-
+    
     .category_card_body-subtitle {
+      margin: 10px 0 5px;
       font-weight: lighter;
       font-size: 16px;
     }
