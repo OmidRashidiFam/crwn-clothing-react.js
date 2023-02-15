@@ -1,40 +1,42 @@
-import './App.css';
+import './App.css'
+import CategoryItem from './components/category-item/category-item'
 
 function App() {
 
   const categories = [
     {
-      id: '1',
-      title: 'Hats'
+      "id": 1,
+      "title": "hats",
+      "imageUrl": "https://i.ibb.co/cvpntL1/hats.png"
     },
     {
-      id: '2',
-      title: 'Jackets'
+      "id": 2,
+      "title": "jackets",
+      "imageUrl": "https://i.ibb.co/px2tCc3/jackets.png"
     },
     {
-      id: '3',
-      title: 'Snekers'
+      "id": 3,
+      "title": "sneakers",
+      "imageUrl": "https://i.ibb.co/0jqHpnp/sneakers.png"
     },
     {
-      id: '4',
-      title: 'Womens'
+      "id": 4,
+      "title": "womens",
+      "large": 'true',
+      "imageUrl": "https://i.ibb.co/GCCdy8t/womens.png"
     },
     {
-      id: '5',
-      title: 'Mens'
-    },
+      "id": 5,
+      "title": "mens",
+      "large": 'true',
+      "imageUrl": "https://i.ibb.co/R70vBrQ/men.png"
+    }
   ]
 
   return (
     <div className="categories_container">
-      {categories.map(({ id, title }) => (
-        <div className='category_card' key={id}>
-          <div className='category_card_img' />
-          <div className='category_card_body'>
-            <h2 className='category_card_body-title'>{title}</h2>
-            <p className='category_card_body-subtitle'>Shop Now</p>
-          </div>
-        </div>
+      {categories.map((category) => (
+        <CategoryItem key={category.id} category={category} />
       ))}
     </div>
   );
