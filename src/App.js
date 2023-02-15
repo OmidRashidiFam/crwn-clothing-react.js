@@ -1,5 +1,5 @@
 import './App.css'
-import CategoryItem from './components/category-item/category-item'
+import DirectoryMenu from './components/directory-menu/directory-menu'
 
 function App() {
 
@@ -34,11 +34,7 @@ function App() {
   ]
 
   return (
-    <div className="categories_container">
-      {categories.map((category) => (
-        <CategoryItem key={category.id} category={category} />
-      ))}
-    </div>
+    <DirectoryMenu categories={categories} />
   );
 }
 
