@@ -1,10 +1,15 @@
+import { Routes, Route } from "react-router-dom";
+import HomePage from './routes/home-page/home-page'
 import './App.css'
-import categories from './data/categories'
-import DirectoryMenu from './components/directory-menu/directory-menu'
 
 function App() {
   return (
-    <DirectoryMenu categories={categories} />
+    <div className='app'>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+      </Routes>
+    </div>
+
   );
 }
 
