@@ -3,7 +3,7 @@ import {
   createUserDocumentFromAuth,
 } from '../../utils/firebase/firebase'
 
-const SignupPage = () => {
+const AuthpPage = () => {
   const logGoogleUser = async () => {
     const response = await signInWithGooglePopup() // after signin with google we get back a response obj
     const userDocRef = await createUserDocumentFromAuth(response.user) // create a doc with response.user=userAuth
@@ -11,7 +11,7 @@ const SignupPage = () => {
   }
 
   return (
-    <div className="signupPage">
+    <div className="authPage">
 
       <h1>sign up page</h1>
       <button onClick={logGoogleUser}>
@@ -21,4 +21,4 @@ const SignupPage = () => {
   );
 }
 
-export default SignupPage;
+export default AuthpPage;
