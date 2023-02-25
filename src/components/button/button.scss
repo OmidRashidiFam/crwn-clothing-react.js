@@ -24,11 +24,13 @@
 
   &.btn_google_signin {
     background-color: #4285f4;
+    border: 1px solid #4285f4;
     color: whitesmoke;
 
     &:hover {
       background-color: #357ae8;
       border: none;
+      border: 1px solid #357ae8;
     }
   }
 
