@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+
 import FormInput from "../form-input/form-input";
 import Button from "../button/button";
 import {
@@ -6,8 +7,9 @@ import {
   createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase";
+import { AuthContext } from "../../contexts/auth-context";
+
 import "./sign-in-form.scss";
-import { serverTimestamp } from "firebase/firestore";
 
 const defaultFormFields = {
   email: "",
@@ -19,32 +21,53 @@ const SignInForm = () => {
   const [formFields, setformFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
+  // useing the auth context
+  const { setCurentUser } = useContext(AuthContext);
+
   // handeler function
   const handleChange = (event) => {
     const { value, name } = event.target;
     setformFields({ ...formFields, [name]: value });
   };
 
+  // handeler function
   const handleClickButton = async () => {
-    const response = await signInWithGooglePopup(); // after signin with google we get back a response obj
-    await createUserDocumentFromAuth(response.user); // create a doc with response.user=userAuth
+    const { user } = await signInWithGooglePopup(); // after signin with google we get back a response obj
+    await createUserDocumentFromAuth(user); // create a doc with response.user=userAuth
+
+    setCurentUser(user);
+    alert("Signed In successfully!!!");
+    console.log("Signed In successfully!!!");
   };
 
+  // handeler function
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await signInAuthUserWithEmailAndPassword(
+      const { user } = await signInAuthUserWithEmailAndPassword(
         email,
         password
       );
+
+      setCurentUser(user);
+      console.log("Signed In successfully!!!");
+      alert("Signed In successfully!!!");
     } catch (error) {
       switch (error.code) {
         case "auth/wrong-password":
+          console.log("Wrong Password!!!");
           alert("Wrong Password!!!");
           break;
         case "auth/user-not-found":
+          console.log("User not found, Email incorrect!!!");
           alert("User not found, Email incorrect!!!");
+          break;
+        case "auth/network-request-failed":
+          console.log(
+            "Request faild, Please check your Enternet connection!!!"
+          );
+          alert("Request faild, Please check your Enternet connection!!!");
           break;
         default:
           console.log(error);

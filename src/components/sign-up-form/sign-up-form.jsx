@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase";
 import FormInput from "../form-input/form-input";
 import Button from "../button/button";
+import { AuthContext } from "../../contexts/auth-context";
+
 import "./sign-up-form.scss";
 
 // default value for state
@@ -20,12 +23,16 @@ const SignUpForm = () => {
   const [formFields, setformFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
+  // useing Auth context
+  const { setCurentUser } = useContext(AuthContext);
+
   //handler function
   const handleChange = (event) => {
     const { name, value } = event.target;
     setformFields({ ...formFields, [name]: value });
   };
 
+  //handler function
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -34,19 +41,25 @@ const SignUpForm = () => {
       return;
     }
     try {
-      const response = await createAuthUserWithEmailAndPassword(
+      const { user } = await createAuthUserWithEmailAndPassword(
         email,
         password
       );
-      await createUserDocumentFromAuth(response.user, {
+      await createUserDocumentFromAuth(user, {
         displayName: displayName,
       });
+
+      setCurentUser(user);
+      console.log("Signed Up Successfully!!!");
+      alert("Signed Up Successfully!!!");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
+        console.log("Cannot create User, Email already in use!!!");
         alert("Cannot create User, Email already in use!!!");
       }
       if (error.code === "auth/weak-password") {
-        alert("Password must be at least 8 character, Week Password!!!");
+        console.log("Password must be at least 6 character, Week Password!!!");
+        alert("Password must be at least 6 character, Week Password!!!");
       }
       console.log(error);
     }

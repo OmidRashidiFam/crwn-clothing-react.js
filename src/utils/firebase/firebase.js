@@ -1,11 +1,11 @@
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
-  signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -23,26 +23,32 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // initialize firebase authentication
-const auth = getAuth();
+export const auth = getAuth();
+
 // setup Google authentication
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: "select_account" });
-const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
+export const signInWithGooglePopup = () =>
+  signInWithPopup(auth, googleProvider);
 
-const createAuthUserWithEmailAndPassword = async (email, password) => {
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
   const response = await createUserWithEmailAndPassword(auth, email, password);
   return response;
 };
-const signInAuthUserWithEmailAndPassword = async (email, password) => {
+
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
   const response = await signInWithEmailAndPassword(auth, email, password);
   return response;
 };
 
+export const signOutUser = async () => await signOut(auth);
+
 // initialize firestore
-const db = getFirestore();
-const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
+export const db = getFirestore();
+
+export const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
   if (!userAuth) return;
 
   // address for the doc
@@ -65,20 +71,10 @@ const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
         ...additionalInfo,
       });
     } catch (error) {
-      console.log("Error creating the user", error.message);
+      console.log(error);
     }
   }
 
   // user dose exist
   return userDocRef;
-};
-
-// exporting out
-export {
-  auth,
-  signInWithGooglePopup,
-  db,
-  createUserDocumentFromAuth,
-  createAuthUserWithEmailAndPassword,
-  signInAuthUserWithEmailAndPassword,
 };
