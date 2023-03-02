@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import App from "./App";
 import { AuthUserContextProvider } from "./contexts/user-auth-context";
+import { ProductContextProvider } from "./contexts/product-context";
 
 import "./index.scss";
 
@@ -11,7 +12,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
     <AuthUserContextProvider>
-      <App />
+      <ProductContextProvider>
+        <App />
+      </ProductContextProvider>
     </AuthUserContextProvider>
   </Router>
 );
