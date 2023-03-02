@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 
 import {
   createAuthUserWithEmailAndPassword,
@@ -6,7 +6,6 @@ import {
 } from "../../utils/firebase/firebase";
 import FormInput from "../form-input/form-input";
 import Button from "../button/button";
-import { AuthContext } from "../../contexts/auth-context";
 
 import "./sign-up-form.scss";
 
@@ -23,9 +22,6 @@ const SignUpForm = () => {
   const [formFields, setformFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
-  // useing Auth context
-  const { setCurentUser } = useContext(AuthContext);
-
   //handler function
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -37,9 +33,10 @@ const SignUpForm = () => {
     event.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("Password do not match!!!");
+      console.log("Error: Password do not match!!!");
       return;
     }
+
     try {
       const { user } = await createAuthUserWithEmailAndPassword(
         email,
@@ -49,20 +46,25 @@ const SignUpForm = () => {
         displayName: displayName,
       });
 
-      setCurentUser(user);
       console.log("Signed Up Successfully!!!");
-      alert("Signed Up Successfully!!!");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
-        console.log("Cannot create User, Email already in use!!!");
-        alert("Cannot create User, Email already in use!!!");
+        console.log("Error: Cannot create User, Email already in use!!!");
       }
       if (error.code === "auth/weak-password") {
-        console.log("Password must be at least 6 character, Week Password!!!");
-        alert("Password must be at least 6 character, Week Password!!!");
+        console.log(
+          "Error: Password must be at least 6 character, Week Password!!!"
+        );
       }
+      if (error.code === "auth/network-request-failed") {
+        console.log(
+          "Error: Request faild, Please check your Enternet connection!!!"
+        );
+      }
+
       console.log(error);
     }
+
     setformFields(defaultFormFields);
   };
 

@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 
 import FormInput from "../form-input/form-input";
 import Button from "../button/button";
@@ -7,7 +7,6 @@ import {
   createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase";
-import { AuthContext } from "../../contexts/auth-context";
 
 import "./sign-in-form.scss";
 
@@ -21,9 +20,6 @@ const SignInForm = () => {
   const [formFields, setformFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
-  // useing the auth context
-  const { setCurentUser } = useContext(AuthContext);
-
   // handeler function
   const handleChange = (event) => {
     const { value, name } = event.target;
@@ -35,9 +31,7 @@ const SignInForm = () => {
     const { user } = await signInWithGooglePopup(); // after signin with google we get back a response obj
     await createUserDocumentFromAuth(user); // create a doc with response.user=userAuth
 
-    setCurentUser(user);
-    alert("Signed In successfully!!!");
-    console.log("Signed In successfully!!!");
+    console.log("Signed In with google was successfully!!!");
   };
 
   // handeler function
@@ -45,29 +39,21 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      const { user } = await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
+      await signInAuthUserWithEmailAndPassword(email, password);
 
-      setCurentUser(user);
-      console.log("Signed In successfully!!!");
-      alert("Signed In successfully!!!");
+      console.log("Signed In with email and password was successfully!!!");
     } catch (error) {
       switch (error.code) {
         case "auth/wrong-password":
-          console.log("Wrong Password!!!");
-          alert("Wrong Password!!!");
+          console.log("Error: Wrong Password!!!");
           break;
         case "auth/user-not-found":
-          console.log("User not found, Email incorrect!!!");
-          alert("User not found, Email incorrect!!!");
+          console.log("Error: User not found, Email incorrect!!!");
           break;
         case "auth/network-request-failed":
           console.log(
-            "Request faild, Please check your Enternet connection!!!"
+            "Error: Request faild, Please check your Enternet connection!!!"
           );
-          alert("Request faild, Please check your Enternet connection!!!");
           break;
         default:
           console.log(error);

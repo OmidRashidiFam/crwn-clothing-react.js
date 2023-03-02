@@ -9,14 +9,13 @@ import "./navbar.scss";
 
 const Navbar = () => {
   // useing auth context
-  const { curentUser, setCurentUser } = useContext(AuthContext);
+  const { curentUser } = useContext(AuthContext);
 
   // handeler function
   const handleSignOut = async () => {
     await signOutUser();
-    setCurentUser(null);
+
     console.log("Sign Out successfully!!!");
-    alert("Sign Out successfully");
   };
 
   return (
