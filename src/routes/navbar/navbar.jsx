@@ -4,6 +4,7 @@ import { Outlet, Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { AuthUserContext } from "../../contexts/user-auth-context";
 import { signOutUser } from "../../utils/firebase/firebase";
+import ShopingBagIcon from "../../components/shoping-bag-icon/shoping-bag-icon";
 
 import "./navbar.scss";
 
@@ -40,6 +41,7 @@ const Navbar = () => {
               SIGN IN
             </Link>
           )}
+          <ShopingBagIcon />
         </div>
       </div>
       <Outlet />
