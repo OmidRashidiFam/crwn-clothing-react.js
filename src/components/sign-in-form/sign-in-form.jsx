@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import FormInput from "../form-input/form-input";
 import Button from "../button/button";
 import {
@@ -6,8 +7,8 @@ import {
   createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase";
+
 import "./sign-in-form.scss";
-import { serverTimestamp } from "firebase/firestore";
 
 const defaultFormFields = {
   email: "",
@@ -25,26 +26,34 @@ const SignInForm = () => {
     setformFields({ ...formFields, [name]: value });
   };
 
+  // handeler function
   const handleClickButton = async () => {
-    const response = await signInWithGooglePopup(); // after signin with google we get back a response obj
-    await createUserDocumentFromAuth(response.user); // create a doc with response.user=userAuth
+    const { user } = await signInWithGooglePopup(); // after signin with google we get back a response obj
+    await createUserDocumentFromAuth(user); // create a doc with response.user=userAuth
+
+    console.log("Signed In with google was successfully!!!");
   };
 
+  // handeler function
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
+      await signInAuthUserWithEmailAndPassword(email, password);
+
+      console.log("Signed In with email and password was successfully!!!");
     } catch (error) {
       switch (error.code) {
         case "auth/wrong-password":
-          alert("Wrong Password!!!");
+          console.log("Error: Wrong Password!!!");
           break;
         case "auth/user-not-found":
-          alert("User not found, Email incorrect!!!");
+          console.log("Error: User not found, Email incorrect!!!");
+          break;
+        case "auth/network-request-failed":
+          console.log(
+            "Error: Request faild, Please check your Enternet connection!!!"
+          );
           break;
         default:
           console.log(error);

@@ -1,10 +1,12 @@
 import { useState } from "react";
+
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase";
 import FormInput from "../form-input/form-input";
 import Button from "../button/button";
+
 import "./sign-up-form.scss";
 
 // default value for state
@@ -26,30 +28,43 @@ const SignUpForm = () => {
     setformFields({ ...formFields, [name]: value });
   };
 
+  //handler function
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("Password do not match!!!");
+      console.log("Error: Password do not match!!!");
       return;
     }
+
     try {
-      const response = await createAuthUserWithEmailAndPassword(
+      const { user } = await createAuthUserWithEmailAndPassword(
         email,
         password
       );
-      await createUserDocumentFromAuth(response.user, {
+      await createUserDocumentFromAuth(user, {
         displayName: displayName,
       });
+
+      console.log("Signed Up Successfully!!!");
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
-        alert("Cannot create User, Email already in use!!!");
+        console.log("Error: Cannot create User, Email already in use!!!");
       }
       if (error.code === "auth/weak-password") {
-        alert("Password must be at least 8 character, Week Password!!!");
+        console.log(
+          "Error: Password must be at least 6 character, Week Password!!!"
+        );
       }
+      if (error.code === "auth/network-request-failed") {
+        console.log(
+          "Error: Request faild, Please check your Enternet connection!!!"
+        );
+      }
+
       console.log(error);
     }
+
     setformFields(defaultFormFields);
   };
 
