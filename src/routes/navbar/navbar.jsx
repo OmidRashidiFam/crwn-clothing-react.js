@@ -2,14 +2,14 @@ import { Fragment, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
-import { AuthContext } from "../../contexts/auth-context";
+import { AuthUserContext } from "../../contexts/user-auth-context";
 import { signOutUser } from "../../utils/firebase/firebase";
 
 import "./navbar.scss";
 
 const Navbar = () => {
   // useing auth context
-  const { curentUser } = useContext(AuthContext);
+  const { curentUser } = useContext(AuthUserContext);
 
   // handeler function
   const handleSignOut = async () => {
