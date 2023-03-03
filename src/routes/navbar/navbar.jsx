@@ -2,14 +2,19 @@ import { Fragment, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
-import { AuthContext } from "../../contexts/auth-context";
+import { AuthUserContext } from "../../contexts/user-auth-context";
 import { signOutUser } from "../../utils/firebase/firebase";
+import ShopingBagIcon from "../../components/shoping-bag-icon/shoping-bag-icon";
+import CardDropdown from "../../components/card-dropdown/card-dropdown";
+import { DropdownContext } from "../../contexts/dropdown-context";
 
 import "./navbar.scss";
 
 const Navbar = () => {
   // useing auth context
-  const { curentUser } = useContext(AuthContext);
+  const { curentUser } = useContext(AuthUserContext);
+  // useing dropdown context
+  const { isVisible } = useContext(DropdownContext);
 
   // handeler function
   const handleSignOut = async () => {
@@ -40,7 +45,9 @@ const Navbar = () => {
               SIGN IN
             </Link>
           )}
+          <ShopingBagIcon />
         </div>
+        {isVisible ? <CardDropdown /> : null}
       </div>
       <Outlet />
     </Fragment>

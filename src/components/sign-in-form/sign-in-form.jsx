@@ -88,7 +88,7 @@ const SignInForm = () => {
           <Button children="sign in" type="submit" />
           <Button
             type="button"
-            children="google sign in"
+            children="sign in with google"
             buttonType="google"
             onClick={handleClickButton}
           />

@@ -1,0 +1,50 @@
+.product_card_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 420px;
+  align-items: center;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 95%;
+    object-fit: cover;
+    margin-bottom: 5px;
+  }
+
+  button {
+    width: 75%;
+    opacity: 0.75;
+    position: absolute;
+    top: 300px;
+    display: none;
+  }
+
+  &:hover {
+    img {
+      opacity: 0.8;
+    }
+
+    button {
+      opacity: 0.9;
+      display: flex;
+    }
+  }
+
+  .product_card_footer {
+    width: 100%;
+    height: 5%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+
+    .product_card_footer_naem {
+      width: 90%;
+    }
+
+    .product_card_footer_price {
+      width: 10%;
+    }
+  }
+}
