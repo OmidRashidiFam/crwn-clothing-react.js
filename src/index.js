@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 import { AuthUserContextProvider } from "./contexts/user-auth-context";
 import { ProductContextProvider } from "./contexts/product-context";
+import { DropdownContextProvider } from "./contexts/dropdown-context";
 
 import "./index.scss";
 
@@ -13,7 +14,9 @@ root.render(
   <Router>
     <AuthUserContextProvider>
       <ProductContextProvider>
-        <App />
+        <DropdownContextProvider>
+          <App />
+        </DropdownContextProvider>
       </ProductContextProvider>
     </AuthUserContextProvider>
   </Router>

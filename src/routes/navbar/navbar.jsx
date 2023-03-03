@@ -5,12 +5,16 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { AuthUserContext } from "../../contexts/user-auth-context";
 import { signOutUser } from "../../utils/firebase/firebase";
 import ShopingBagIcon from "../../components/shoping-bag-icon/shoping-bag-icon";
+import CardDropdown from "../../components/card-dropdown/card-dropdown";
+import { DropdownContext } from "../../contexts/dropdown-context";
 
 import "./navbar.scss";
 
 const Navbar = () => {
   // useing auth context
   const { curentUser } = useContext(AuthUserContext);
+  // useing dropdown context
+  const { isVisible } = useContext(DropdownContext);
 
   // handeler function
   const handleSignOut = async () => {
@@ -43,6 +47,7 @@ const Navbar = () => {
           )}
           <ShopingBagIcon />
         </div>
+        {isVisible ? <CardDropdown /> : null}
       </div>
       <Outlet />
     </Fragment>
