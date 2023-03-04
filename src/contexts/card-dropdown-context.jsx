@@ -1,16 +1,24 @@
 import { createContext, useState } from "react";
 
 export const DropdownContext = createContext({
-  // dropdownItems: null,
   isVisible: false,
-  // setDropdownItems: () => null,
+  cardDropdownItems: [],
   setIsVisible: () => {},
+  setDropdownItems: () => {},
 });
 
 export const DropdownContextProvider = ({ children }) => {
-  // const [dropdownItems, setDropdownItems] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
-  const value = { isVisible, setIsVisible };
+  const [cardDropdownItems, setCardDropdownItems] = useState([]);
+
+  const addToCardDropdown = () => {};
+
+  const value = {
+    isVisible,
+    setIsVisible,
+    cardDropdownItems,
+    setCardDropdownItems,
+  };
 
   return (
     <DropdownContext.Provider value={value}>

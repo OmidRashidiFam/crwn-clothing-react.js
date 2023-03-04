@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import { ReactComponent as ShopingIcon } from "../../assets/shopping-bag.svg";
-import { DropdownContext } from "../../contexts/dropdown-context";
+import { DropdownContext } from "../../contexts/card-dropdown-context";
 
 import "./shoping-bag-icon.scss";
 
@@ -11,7 +11,6 @@ const ShopingBagIcon = () => {
 
   // handeler function
   const toggleIsVisible = () => {
-    console.log("click!!!");
     setIsVisible(!isVisible);
   };
 
