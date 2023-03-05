@@ -1,23 +1,56 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const DropdownContext = createContext({
   isVisible: false,
   cardDropdownItems: [],
+  cardDropdownItemsCount: 0,
   setIsVisible: () => {},
   setDropdownItems: () => {},
 });
 
+// helper function
+const addcardItem = (cardDropdownItems, productToAdd) => {
+  // find if card item contains productToAdd
+  const existingCardDropdownItem = cardDropdownItems.find(
+    (cardDropdownItem) => cardDropdownItem.id === productToAdd.id
+  );
+
+  // if found, increse the quantity
+  if (existingCardDropdownItem) {
+    return cardDropdownItems.map((cardDropdownItem) =>
+      cardDropdownItem.id === productToAdd.id
+        ? {
+            ...cardDropdownItem,
+            quantity: cardDropdownItem.quantity + 1,
+          }
+        : cardDropdownItem
+    );
+  }
+
+  // return the new array
+  return [...cardDropdownItems, { ...productToAdd, quantity: 1 }];
+};
+
 export const DropdownContextProvider = ({ children }) => {
+  // useing state
   const [isVisible, setIsVisible] = useState(false);
   const [cardDropdownItems, setCardDropdownItems] = useState([]);
+  const [cardDropdownItemsCount, setCardDropdownItemsCount] = useState(0);
 
-  const addToCardDropdown = () => {};
+  // using effct
+  useEffect(() => {}, [cardDropdownItemsCount]);
+
+  const addItemToCardDropdown = (productToAdd) => {
+    setCardDropdownItems(addcardItem(cardDropdownItems, productToAdd));
+    setCardDropdownItemsCount(cardDropdownItemsCount + 1);
+  };
 
   const value = {
     isVisible,
     setIsVisible,
     cardDropdownItems,
-    setCardDropdownItems,
+    cardDropdownItemsCount,
+    addItemToCardDropdown,
   };
 
   return (

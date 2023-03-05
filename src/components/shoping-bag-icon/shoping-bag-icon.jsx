@@ -7,7 +7,8 @@ import "./shoping-bag-icon.scss";
 
 const ShopingBagIcon = () => {
   // use dropdown context
-  const { isVisible, setIsVisible } = useContext(DropdownContext);
+  const { isVisible, setIsVisible, cardDropdownItemsCount } =
+    useContext(DropdownContext);
 
   // handeler function
   const toggleIsVisible = () => {
@@ -17,7 +18,7 @@ const ShopingBagIcon = () => {
   return (
     <div className="shoping_bag_icon_container" onClick={toggleIsVisible}>
       <ShopingIcon className="shoping_bag_icon" />
-      <span className="shoping_bag_icon_counter">0</span>
+      <span className="shoping_bag_icon_counter">{cardDropdownItemsCount}</span>
     </div>
   );
 };
