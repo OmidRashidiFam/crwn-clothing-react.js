@@ -6,7 +6,7 @@ import { AuthUserContext } from "../../contexts/user-auth-context";
 import { signOutUser } from "../../utils/firebase/firebase";
 import ShopingBagIcon from "../../components/shoping-bag-icon/shoping-bag-icon";
 import CardDropdown from "../../components/card-dropdown/card-dropdown";
-import { DropdownContext } from "../../contexts/dropdown-context";
+import { DropdownContext } from "../../contexts/card-dropdown-context";
 
 import "./navbar.scss";
 
