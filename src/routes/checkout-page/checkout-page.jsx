@@ -38,20 +38,45 @@ const CheckoutPage = () => {
     }
   };
 
-  const decriment = (cardDropdownItems, productToAdd) => {
-    // find the card item contains productToAdd
+  const decriment = (cardDropdownItems, productToRemove) => {
+    // find the card item contains productToRemove
     const existingCardDropdownItem = cardDropdownItems.find(
-      (cardDropdownItem) => cardDropdownItem.id === productToAdd.id
+      (cardDropdownItem) => cardDropdownItem.id === productToRemove.id
     );
+
+    // remove when card item quantity is 1
+    if (existingCardDropdownItem.quantity === 1) {
+      return cardDropdownItems.filter(
+        (cardDropdownItem) => cardDropdownItem.id !== productToRemove.id
+      );
+    }
+
     // if found, decrese the quantity
     if (existingCardDropdownItem) {
       return cardDropdownItems.map((cardDropdownItem) =>
-        cardDropdownItem.id === productToAdd.id
+        cardDropdownItem.id === productToRemove.id
           ? {
               ...cardDropdownItem,
               quantity: cardDropdownItem.quantity - 1,
             }
           : cardDropdownItem
+      );
+    }
+  };
+
+  const remove = (cardDropdownItems, productToRemove) => {
+    // find the card item contains productToRemove
+    const existingCardDropdownItem = cardDropdownItems.find(
+      (cardDropdownItem) => cardDropdownItem.id === productToRemove.id
+    );
+
+    // remove the card and decrese the quantity
+    if (existingCardDropdownItem) {
+      setCardDropdownItemsCount(
+        cardDropdownItemsCount - existingCardDropdownItem.quantity
+      );
+      return cardDropdownItems.filter(
+        (cardDropdownItem) => cardDropdownItem.id !== productToRemove.id
       );
     }
   };
@@ -62,9 +87,13 @@ const CheckoutPage = () => {
     setCardDropdownItemsCount(cardDropdownItemsCount + 1);
   };
 
-  const handleDecrement = (productToAdd) => {
-    setCardDropdownItems(decriment(cardDropdownItems, productToAdd));
+  const handleDecrement = (productToRemove) => {
+    setCardDropdownItems(decriment(cardDropdownItems, productToRemove));
     setCardDropdownItemsCount(cardDropdownItemsCount - 1);
+  };
+
+  const handleRemove = (productToRemove) => {
+    setCardDropdownItems(remove(cardDropdownItems, productToRemove));
   };
 
   return (
@@ -95,7 +124,13 @@ const CheckoutPage = () => {
             </span>
             <span>{price}$</span>
             <span>
-              <button>X</button>
+              <button
+                onClick={() => {
+                  handleRemove(item);
+                }}
+              >
+                X
+              </button>
             </span>
           </div>
         );
