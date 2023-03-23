@@ -47,7 +47,9 @@ export const DropdownContextProvider = ({ children }) => {
     isVisible,
     setIsVisible,
     cardDropdownItems,
+    setCardDropdownItems,
     cardDropdownItemsCount,
+    setCardDropdownItemsCount,
     addItemToCardDropdown,
   };
 
