@@ -10,10 +10,11 @@ const ProductCard = ({ product }) => {
   const { name, price, imageUrl } = product;
 
   // use card dropdown context
-  const { addItemToCardDropdown } = useContext(DropdownContext);
+  const { setIsVisible, addItemToCardDropdown } = useContext(DropdownContext);
 
   // handler function
   const addProductToCardDropdown = () => {
+    setIsVisible(true);
     addItemToCardDropdown(product);
   };
 

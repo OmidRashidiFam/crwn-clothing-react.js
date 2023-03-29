@@ -1,0 +1,24 @@
+.checkout_container {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+
+  .checkout_item {
+    width: 900px;
+    margin: 15px auto;
+    padding: 15px 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    img {
+      width: 20%;
+    }
+
+    button {
+      margin: 0 15px;
+    }
+  }
+}
