@@ -98,6 +98,24 @@ const CheckoutPage = () => {
 
   return (
     <div className="checkout_container">
+      <div className="checkout_header">
+        <div className="header_block">
+          <span>product</span>
+        </div>
+        <div className="header_block">
+          <span>description</span>
+        </div>
+        <div className="header_block">
+          <span>quantity</span>
+        </div>
+        <div className="header_block">
+          <span>price</span>
+        </div>
+        <div className="header_block">
+          <span>remove</span>
+        </div>
+      </div>
+
       {cardDropdownItems.map((item) => {
         const { id, imageUrl, price, quantity, name } = item;
         return (
@@ -135,6 +153,8 @@ const CheckoutPage = () => {
           </div>
         );
       })}
+
+      <span className="total">Total: 0</span>
     </div>
   );
 };
