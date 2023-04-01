@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const DropdownContext = createContext({
   isVisible: false,
@@ -7,6 +7,7 @@ export const DropdownContext = createContext({
   setDropdownItems: () => {},
   cardDropdownItemsCount: 0,
   setCardDropdownItemsCount: () => {},
+  total: 0,
 });
 
 // helper function
@@ -37,10 +38,28 @@ export const DropdownContextProvider = ({ children }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [cardDropdownItems, setCardDropdownItems] = useState([]);
   const [cardDropdownItemsCount, setCardDropdownItemsCount] = useState(0);
+  const [total, setTotal] = useState(0);
+
+  // using effect
+  useEffect(() => {
+    const newCount = cardDropdownItems.reduce(
+      (count, cardDropdownItems) => count + cardDropdownItems.quantity,
+      0
+    );
+    setCardDropdownItemsCount(newCount);
+  }, [cardDropdownItems]);
+
+  useEffect(() => {
+    const newTotal = cardDropdownItems.reduce(
+      (total, cardDropdownItems) =>
+        total + cardDropdownItems.quantity * cardDropdownItems.price,
+      0
+    );
+    setTotal(newTotal);
+  }, [cardDropdownItems]);
 
   const addItemToCardDropdown = (productToAdd) => {
     setCardDropdownItems(addcardItem(cardDropdownItems, productToAdd));
-    setCardDropdownItemsCount(cardDropdownItemsCount + 1);
   };
 
   const value = {
@@ -51,6 +70,7 @@ export const DropdownContextProvider = ({ children }) => {
     cardDropdownItemsCount,
     setCardDropdownItemsCount,
     addItemToCardDropdown,
+    total,
   };
 
   return (

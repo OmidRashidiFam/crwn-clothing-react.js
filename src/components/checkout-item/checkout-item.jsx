@@ -8,12 +8,8 @@ import "./checkout-item.scss";
 
 const CheckoutItem = ({ cardItem }) => {
   // useing card dropdown context
-  const {
-    cardDropdownItems,
-    setCardDropdownItems,
-    cardDropdownItemsCount,
-    setCardDropdownItemsCount,
-  } = useContext(DropdownContext);
+  const { cardDropdownItems, setCardDropdownItems } =
+    useContext(DropdownContext);
 
   // helper functions
   const incriment = (cardDropdownItems, productToAdd) => {
@@ -39,14 +35,12 @@ const CheckoutItem = ({ cardItem }) => {
     const existingCardDropdownItem = cardDropdownItems.find(
       (cardDropdownItem) => cardDropdownItem.id === productToRemove.id
     );
-
     // remove when card item quantity is 1
     if (existingCardDropdownItem.quantity === 1) {
       return cardDropdownItems.filter(
         (cardDropdownItem) => cardDropdownItem.id !== productToRemove.id
       );
     }
-
     // if found, decrese the quantity
     if (existingCardDropdownItem) {
       return cardDropdownItems.map((cardDropdownItem) =>
@@ -65,12 +59,8 @@ const CheckoutItem = ({ cardItem }) => {
     const existingCardDropdownItem = cardDropdownItems.find(
       (cardDropdownItem) => cardDropdownItem.id === productToRemove.id
     );
-
-    // remove the card and decrese the quantity
+    // remove the card
     if (existingCardDropdownItem) {
-      setCardDropdownItemsCount(
-        cardDropdownItemsCount - existingCardDropdownItem.quantity
-      );
       return cardDropdownItems.filter(
         (cardDropdownItem) => cardDropdownItem.id !== productToRemove.id
       );
@@ -80,19 +70,17 @@ const CheckoutItem = ({ cardItem }) => {
   // handeler functions
   const handleIncrement = (productToAdd) => {
     setCardDropdownItems(incriment(cardDropdownItems, productToAdd));
-    setCardDropdownItemsCount(cardDropdownItemsCount + 1);
   };
 
   const handleDecrement = (productToRemove) => {
     setCardDropdownItems(decriment(cardDropdownItems, productToRemove));
-    setCardDropdownItemsCount(cardDropdownItemsCount - 1);
   };
 
   const handleRemove = (productToRemove) => {
     setCardDropdownItems(remove(cardDropdownItems, productToRemove));
   };
 
-  const { id, imageUrl, price, quantity, name } = cardItem;
+  const { imageUrl, price, quantity, name } = cardItem;
   return (
     <div className="checkout_item_container">
       <div className="image-container">

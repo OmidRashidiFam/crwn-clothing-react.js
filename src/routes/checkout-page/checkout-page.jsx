@@ -7,7 +7,8 @@ import "./checkout-page.scss";
 
 const CheckoutPage = () => {
   // useing card dropdown context
-  const { cardDropdownItems, setIsVisible } = useContext(DropdownContext);
+  const { cardDropdownItems, setIsVisible, total } =
+    useContext(DropdownContext);
 
   // useing effect
   useEffect(() => {
@@ -38,7 +39,7 @@ const CheckoutPage = () => {
         return <CheckoutItem key={cardItem.id} cardItem={cardItem} />;
       })}
 
-      <span className="total">Total: 0</span>
+      <span className="total">Total: {total}$</span>
     </div>
   );
 };
