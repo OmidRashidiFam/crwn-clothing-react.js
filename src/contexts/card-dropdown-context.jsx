@@ -11,12 +11,11 @@ export const DropdownContext = createContext({
 });
 
 // helper function
-const addcardItem = (cardDropdownItems, productToAdd) => {
+const incriment = (cardDropdownItems, productToAdd) => {
   // find if card item contains productToAdd
   const existingCardDropdownItem = cardDropdownItems.find(
     (cardDropdownItem) => cardDropdownItem.id === productToAdd.id
   );
-
   // if found, increse the quantity
   if (existingCardDropdownItem) {
     return cardDropdownItems.map((cardDropdownItem) =>
@@ -28,9 +27,45 @@ const addcardItem = (cardDropdownItems, productToAdd) => {
         : cardDropdownItem
     );
   }
-
   // return the new array
   return [...cardDropdownItems, { ...productToAdd, quantity: 1 }];
+};
+
+const decriment = (cardDropdownItems, productToRemove) => {
+  // find the card item contains productToRemove
+  const existingCardDropdownItem = cardDropdownItems.find(
+    (cardDropdownItem) => cardDropdownItem.id === productToRemove.id
+  );
+  // delete when card item quantity is 1
+  if (existingCardDropdownItem.quantity === 1) {
+    return cardDropdownItems.filter(
+      (cardDropdownItem) => cardDropdownItem.id !== productToRemove.id
+    );
+  }
+  // if found, decrese the quantity
+  if (existingCardDropdownItem) {
+    return cardDropdownItems.map((cardDropdownItem) =>
+      cardDropdownItem.id === productToRemove.id
+        ? {
+            ...cardDropdownItem,
+            quantity: cardDropdownItem.quantity - 1,
+          }
+        : cardDropdownItem
+    );
+  }
+};
+
+const remove = (cardDropdownItems, productToRemove) => {
+  // find the card item contains productToRemove
+  const existingCardDropdownItem = cardDropdownItems.find(
+    (cardDropdownItem) => cardDropdownItem.id === productToRemove.id
+  );
+  // remove the card
+  if (existingCardDropdownItem) {
+    return cardDropdownItems.filter(
+      (cardDropdownItem) => cardDropdownItem.id !== productToRemove.id
+    );
+  }
 };
 
 export const DropdownContextProvider = ({ children }) => {
@@ -59,7 +94,15 @@ export const DropdownContextProvider = ({ children }) => {
   }, [cardDropdownItems]);
 
   const addItemToCardDropdown = (productToAdd) => {
-    setCardDropdownItems(addcardItem(cardDropdownItems, productToAdd));
+    setCardDropdownItems(incriment(cardDropdownItems, productToAdd));
+  };
+
+  const removeItemFromCardDropdown = (productToRemove) => {
+    setCardDropdownItems(decriment(cardDropdownItems, productToRemove));
+  };
+
+  const deleteItemFromCardDropdown = (productToRemove) => {
+    setCardDropdownItems(remove(cardDropdownItems, productToRemove));
   };
 
   const value = {
@@ -70,6 +113,8 @@ export const DropdownContextProvider = ({ children }) => {
     cardDropdownItemsCount,
     setCardDropdownItemsCount,
     addItemToCardDropdown,
+    removeItemFromCardDropdown,
+    deleteItemFromCardDropdown,
     total,
   };
 
