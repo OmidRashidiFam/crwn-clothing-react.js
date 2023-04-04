@@ -91,14 +91,14 @@ export const getCollectionAndDocument = async () => {
   // get a snap shot
   const querySnapShot = await getDocs(q);
   // creating a new obj for the category collection
-  const categoryMapedObj = querySnapShot.docs.reduce((acc, docSnapShot) => {
+  const categoryMap = querySnapShot.docs.reduce((acc, docSnapShot) => {
     const { title, items } = docSnapShot.data();
 
     acc[title.toLowerCase()] = items;
     return acc;
   }, {});
 
-  return categoryMapedObj;
+  return categoryMap;
 };
 
 // create the user document
