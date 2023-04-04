@@ -15,7 +15,6 @@ export const CategoriesContextProvider = ({ children }) => {
   useEffect(() => {
     const getCategoryMaped = async () => {
       const categoryObj = await getCollectionAndDocument();
-      console.log(categoryObj);
       setCategoriesMap(categoryObj);
     };
     getCategoryMaped();
