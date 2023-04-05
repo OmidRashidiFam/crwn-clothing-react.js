@@ -1,8 +1,8 @@
-import ProductCard from "../../components/product-card/product-card";
+import ProductCard from "../product-card/product-card";
 
-import "./categories-preview.scss";
+import "./category-preview.scss";
 
-const CategoriesPreview = ({ title, products }) => {
+const CategoryPreview = ({ title, products }) => {
   return (
     <div className="categoryPreview_container">
       <h2>
@@ -19,4 +19,4 @@ const CategoriesPreview = ({ title, products }) => {
   );
 };
 
-export default CategoriesPreview;
+export default CategoryPreview;
