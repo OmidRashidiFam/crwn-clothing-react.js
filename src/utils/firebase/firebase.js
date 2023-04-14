@@ -8,7 +8,16 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+  query,
+  getDocs,
+} from "firebase/firestore";
 
 // your web app's firebase configuration
 const firebaseConfig = {
@@ -55,7 +64,44 @@ export const onAuthStateChangeListener = (callBackFunc) => {
 // initialize firestore
 export const db = getFirestore();
 
-// create th user document
+// create a new collections and documents
+export const addCollectionAndDocument = async (collectionKey, objectsToAdd) => {
+  // address for the collection
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+
+  objectsToAdd.forEach((object) => {
+    // address for the doc using collection collection
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+
+    // set the doc to be object on doc address
+    batch.set(docRef, object);
+  });
+
+  await batch.commit();
+  console.log("done with setting collections and docs");
+};
+
+// get back the collections and documents from
+export const getCollectionAndDocument = async () => {
+  // address for the collection
+  const collectionRef = collection(db, "categories");
+  // a query for the collection
+  const q = query(collectionRef);
+  // get a snap shot
+  const querySnapShot = await getDocs(q);
+  // creating a new obj for the category collection
+  const categoryMap = querySnapShot.docs.reduce((acc, docSnapShot) => {
+    const { title, items } = docSnapShot.data();
+
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
+
+  return categoryMap;
+};
+
+// create the user document
 export const createUserDocumentFromAuth = async (userAuth, additionalInfo) => {
   if (!userAuth) return;
 
