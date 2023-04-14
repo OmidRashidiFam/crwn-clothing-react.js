@@ -3,8 +3,8 @@ import { useState, createContext, useEffect } from "react";
 import { getCollectionAndDocument } from "../utils/firebase/firebase";
 
 export const CategoriesContext = createContext({
-  categories: {},
-  setCategories: () => null,
+  categoriesMap: {},
+  setCategoriesMap: () => null,
 });
 
 export const CategoriesContextProvider = ({ children }) => {
@@ -20,6 +20,7 @@ export const CategoriesContextProvider = ({ children }) => {
     getCategoryMaped();
   }, []);
 
+  // context value
   const value = { categoriesMap, setCategoriesMap };
 
   return (
