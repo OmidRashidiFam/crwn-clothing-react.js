@@ -2,7 +2,7 @@
 import categories from "../../data/categories";
 
 // Import DirectoryMenu component
-import DirectoryMenu from "../../components/directory-menu/directory-menu";
+import DirectoryMenu from "../../components/directory-menu/directory-menu.component";
 
 // Import HomePageContainer style
 import { HomePageContainer } from "./home-page.style";
