@@ -1,5 +1,8 @@
+// import react-router-dom packages
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./routes/navbar/navbar";
+
+// import all the component
+import Navbar from "./routes/navbar/navbar.component";
 import HomePage from "./routes/home-page/home-page";
 import ShopPage from "./routes/shop-page/shop-page";
 import ContactPage from "./routes/contact-page/contact-page";
@@ -9,8 +12,10 @@ import CheckoutPage from "./routes/checkout-page/checkout-page";
 function App() {
   return (
     <div className="app">
+      {/* Create root route and add navigation bar */}
       <Routes>
         <Route path="/" element={<Navbar />}>
+          {/* Add routes for each component */}
           <Route index element={<HomePage />} />
           <Route path="shop/*" element={<ShopPage />} />
           <Route path="contact" element={<ContactPage />} />
@@ -22,4 +27,5 @@ function App() {
   );
 }
 
+// export App component
 export default App;
