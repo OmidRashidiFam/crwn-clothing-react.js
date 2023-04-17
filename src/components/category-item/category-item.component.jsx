@@ -3,7 +3,7 @@ import {
   CategoryCardContainer,
   CategoryCardIMG,
   CategoryCardBody,
-  CategoryCardBodyTitle,
+  h2,
   CategoryCardBodySubtitle,
 } from "./category-item.style";
 
@@ -15,12 +15,12 @@ const CategoryItem = ({ category }) => {
   return (
     // Create a link to the shop page for the category
     <CategoryCardContainer to={`/shop/${title}`}>
-      {/* Set the background image of the card to the provided imageUrl */}
-      <CategoryCardIMG style={{ backgroundImage: `url(${imageUrl})` }} />
+      {/* Set the background image of the card with imageUrl prop */}
+      <CategoryCardIMG imageUrl={imageUrl} />
       <CategoryCardBody>
         {/* Display the title in uppercase */}
-        <CategoryCardBodyTitle>{title.toUpperCase()}</CategoryCardBodyTitle>
-        <CategoryCardBodySubtitle>Shop Now</CategoryCardBodySubtitle>
+        <h2>{title.toUpperCase()}</h2>
+        <p>Shop Now</p>
       </CategoryCardBody>
     </CategoryCardContainer>
   );

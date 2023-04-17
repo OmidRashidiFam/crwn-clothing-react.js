@@ -7,6 +7,7 @@ export const CategoryCardIMG = styled.div`
   height: 100%;
   background-size: cover;
   background-position: center;
+  background-image: ${({ imageUrl }) => `url(${imageUrl})`};
 `;
 
 export const CategoryCardBody = styled.div`
@@ -20,18 +21,19 @@ export const CategoryCardBody = styled.div`
   background-color: white;
   opacity: 0.7;
   position: absolute;
-`;
 
-export const CategoryCardBodyTitle = styled.h2`
-  font-weight: bolder;
-  margin: 0 10px 5px;
-  font-size: 22px;
-  color: #4a4a4a;
-`;
-export const CategoryCardBodySubtitle = styled.p`
-  margin: 10px 0 5px;
-  font-weight: lighter;
-  font-size: 16px;
+  h2 {
+    margin: 0 10px 5px;
+    color: #4a4a4a;
+    font-size: 28px;
+    font-weight: bolder;
+  }
+
+  p {
+    margin: 10px 0 5px;
+    font-weight: lighter;
+    font-size: 18px;
+  }
 `;
 
 export const CategoryCardContainer = styled(Link)`
@@ -48,12 +50,12 @@ export const CategoryCardContainer = styled(Link)`
   &:hover {
     cursor: pointer;
 
-    ${CategoryCardIMG} {
+    & ${CategoryCardIMG} {
       transform: scale(1.1);
       transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
     }
 
-    ${CategoryCardBody} {
+    & ${CategoryCardBody} {
       opacity: 0.9;
     }
   }
