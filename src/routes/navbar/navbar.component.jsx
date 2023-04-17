@@ -12,7 +12,7 @@ import { DropdownContext } from "../../contexts/card-dropdown-context";
 
 // import components
 import ShopingBagIcon from "../../components/shoping-bag-icon/shoping-bag-icon";
-import CardDropdown from "../../components/card-dropdown/card-dropdown";
+import CardDropdown from "../../components/card-dropdown/card-dropdown.component";
 
 // import styles
 import {
