@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Button from "../button/button";
+import Button from "../button/button.component";
 import CardDropdowmItem from "../card-dropdown-item/card-dropdown-item";
 import { DropdownContext } from "../../contexts/card-dropdown-context";
 

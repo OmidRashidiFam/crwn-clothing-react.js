@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import Button from "../button/button";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import { DropdownContext } from "../../contexts/card-dropdown-context";
 
 import "./product-card.scss";
@@ -27,7 +27,7 @@ const ProductCard = ({ product }) => {
       </div>
       <Button
         children="Add to Card"
-        buttonType="inverted"
+        buttonType={BUTTON_TYPE_CLASSES.inverted}
         onClick={addProductToCardDropdown}
       />
     </div>
