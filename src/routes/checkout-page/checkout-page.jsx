@@ -1,7 +1,7 @@
 import { useEffect, useContext } from "react";
 
 import { DropdownContext } from "../../contexts/card-dropdown-context";
-import CheckoutItem from "../../components/checkout-item/checkout-item";
+import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 
 import "./checkout-page.scss";
 
