@@ -1,37 +1,50 @@
+// import useContext from react
 import { useContext } from "react";
-
+// import components
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
+
+// import DropdownContext
 import { DropdownContext } from "../../contexts/card-dropdown-context";
 
-import "./product-card.scss";
+// import style
+import {
+  ProductCardContainer,
+  ProductCardFooter,
+  Name,
+  Price,
+} from "./product-card.style";
 
+// define ProductCard component
 const ProductCard = ({ product }) => {
   // destucture from product
   const { name, price, imageUrl } = product;
 
-  // use card dropdown context
+  // use card dropdown contex
   const { setIsVisible, addItemToCardDropdown } = useContext(DropdownContext);
 
-  // handler function
+  // handler function to add product to card dropdown
   const addProductToCardDropdown = () => {
+    // set dropdown visibility to true
     setIsVisible(true);
+    // add product to card dropdown
     addItemToCardDropdown(product);
   };
 
   return (
-    <div className="product_card_container">
+    <ProductCardContainer>
       <img src={imageUrl} alt={`product naem: ${name}`} />
-      <div className="product_card_footer">
-        <span className="product_card_footer_naem">{name}</span>
-        <span className="product_card_footer_price">{`${price}$`}</span>
-      </div>
+      <ProductCardFooter>
+        <Name>{name}</Name>
+        <Price>{`${price}$`}</Price>
+      </ProductCardFooter>
       <Button
         children="Add to Card"
         buttonType={BUTTON_TYPE_CLASSES.inverted}
         onClick={addProductToCardDropdown}
       />
-    </div>
+    </ProductCardContainer>
   );
 };
 
+// export component
 export default ProductCard;
