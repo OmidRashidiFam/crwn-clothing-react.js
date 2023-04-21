@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import { CategoriesContext } from "../../../contexts/categories-context";
-import CategoryPreview from "../../../components/category-preview/category-preview";
+import CategoryPreview from "../../../components/category-preview/category-preview.component";
 
 const CategoriesPreviewPage = () => {
   // use categories context
