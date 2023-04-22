@@ -3,7 +3,12 @@ import { useEffect, useContext } from "react";
 import { DropdownContext } from "../../contexts/card-dropdown-context";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 
-import "./checkout-page.scss";
+import {
+  CheckoutContainer,
+  CheckoutHeader,
+  CheckoutBlock,
+  Total,
+} from "./checkout-page.style";
 
 const CheckoutPage = () => {
   // useing card dropdown context
@@ -16,31 +21,31 @@ const CheckoutPage = () => {
   }, []);
 
   return (
-    <div className="checkout_container">
-      <div className="checkout_header">
-        <div className="header_block">
+    <CheckoutContainer>
+      <CheckoutHeader>
+        <CheckoutBlock>
           <span>product</span>
-        </div>
-        <div className="header_block">
+        </CheckoutBlock>
+        <CheckoutBlock>
           <span>description</span>
-        </div>
-        <div className="header_block">
+        </CheckoutBlock>
+        <CheckoutBlock>
           <span>quantity</span>
-        </div>
-        <div className="header_block">
+        </CheckoutBlock>
+        <CheckoutBlock>
           <span>price</span>
-        </div>
-        <div className="header_block">
+        </CheckoutBlock>
+        <CheckoutBlock>
           <span>remove</span>
-        </div>
-      </div>
+        </CheckoutBlock>
+      </CheckoutHeader>
 
       {cardDropdownItems.map((cardItem) => {
         return <CheckoutItem key={cardItem.id} cardItem={cardItem} />;
       })}
 
-      <span className="total">Total: {total}$</span>
-    </div>
+      <Total>Total: {total}$</Total>
+    </CheckoutContainer>
   );
 };
 
