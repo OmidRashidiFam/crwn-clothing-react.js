@@ -6,7 +6,7 @@ import Navbar from "./routes/navbar/navbar.component";
 import HomePage from "./routes/home-page/home-page.component";
 import ShopPage from "./routes/shop-page/shop-page";
 import ContactPage from "./routes/contact-page/contact-page.component";
-import AuthpPage from "./routes/auth-page/auth-page";
+import AuthpPage from "./routes/auth-page/auth-page.component";
 import CheckoutPage from "./routes/checkout-page/checkout-page";
 
 function App() {
