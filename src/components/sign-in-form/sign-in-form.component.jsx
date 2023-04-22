@@ -1,70 +1,82 @@
+// import  useState
 import { useState } from "react";
 
+// import components
 import FormInput from "../form-input/form-input.component";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
+
+// import firebase utility functions for signin
 import {
   signInWithGooglePopup,
   createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase";
 
-import "./sign-in-form.scss";
+// import styling components
+import { SigninContainer, BtnGroup } from "./sign-in-form.style";
 
+// set default empty values for form fields
 const defaultFormFields = {
   email: "",
   password: "",
 };
 
+// main functional component
 const SignInForm = () => {
-  // initial useState
+  // initialize state with default form fields
   const [formFields, setformFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
-  // handeler function
+  // handle change event on input fields
   const handleChange = (event) => {
     const { value, name } = event.target;
     setformFields({ ...formFields, [name]: value });
   };
 
-  // handeler function
+  // handle click event when user clicks on signin with google button
   const handleClickButton = async () => {
-    const { user } = await signInWithGooglePopup(); // after signin with google we get back a response obj
-    await createUserDocumentFromAuth(user); // create a doc with response.user=userAuth
-
-    console.log("Signed In with google was successfully!!!");
+    // call signInWithGooglePopup() to get response object
+    const { user } = await signInWithGooglePopup();
+    // create document in firebase with userAuth object
+    await createUserDocumentFromAuth(user);
   };
 
-  // handeler function
+  // handle submit event when user clicks on signin with email and password
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
+      // call signInAuthUserWithEmailAndPassword() to authenticate user
       await signInAuthUserWithEmailAndPassword(email, password);
-
-      console.log("Signed In with email and password was successfully!!!");
     } catch (error) {
       switch (error.code) {
         case "auth/wrong-password":
+          // log error message if wrong password is entered
           console.log("Error: Wrong Password!!!");
           break;
         case "auth/user-not-found":
+          // log error message if user is not found
           console.log("Error: User not found, Email incorrect!!!");
           break;
         case "auth/network-request-failed":
+          // log error message if network request fails
           console.log(
             "Error: Request faild, Please check your Enternet connection!!!"
           );
           break;
         default:
+          // log general error
           console.log(error);
           break;
       }
     }
+
+    // reset form fields to empty values
     setformFields(defaultFormFields);
   };
 
   return (
-    <div className="signin_container">
+    <SigninContainer>
       <h2>Already have an account</h2>
       <span>Sign in with your Email and Password</span>
       <form action="" onSubmit={handleSubmit}>
@@ -84,7 +96,7 @@ const SignInForm = () => {
           name="password"
           value={password}
         />
-        <div className="btn_group">
+        <BtnGroup>
           <Button children="sign in" type="submit" />
           <Button
             type="button"
@@ -92,9 +104,9 @@ const SignInForm = () => {
             buttonType={BUTTON_TYPE_CLASSES.google}
             onClick={handleClickButton}
           />
-        </div>
+        </BtnGroup>
       </form>
-    </div>
+    </SigninContainer>
   );
 };
 
