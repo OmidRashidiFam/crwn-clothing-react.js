@@ -1,3 +1,4 @@
+// import firebase modules
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
@@ -38,26 +39,32 @@ export const auth = getAuth();
 // setup Google authentication
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({ prompt: "select_account" });
+// function to sign in with Google popup
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
 
+// create a new user with email and password
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
+  // create a new user with email and password
   const response = await createUserWithEmailAndPassword(auth, email, password);
   return response;
 };
 
+// sign in an existing user with email and password
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
+  // sign in an existing user with email and password
   const response = await signInWithEmailAndPassword(auth, email, password);
   return response;
 };
 
-// setup the sign out user
+// sign out an existing user
 export const signOutUser = async () => await signOut(auth);
 
 // setup a listener for auth state
 export const onAuthStateChangeListener = (callBackFunc) => {
+  // setup a listener for auth state
   onAuthStateChanged(auth, callBackFunc);
 };
 
@@ -79,7 +86,6 @@ export const addCollectionAndDocument = async (collectionKey, objectsToAdd) => {
   });
 
   await batch.commit();
-  console.log("done with setting collections and docs");
 };
 
 // get back the collections and documents from
