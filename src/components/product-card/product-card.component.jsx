@@ -4,7 +4,7 @@ import { useContext } from "react";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
 // import DropdownContext
-import { DropdownContext } from "../../contexts/card-dropdown-context";
+import { DropdownContext } from "../../contexts/card-context";
 
 // import style
 import {

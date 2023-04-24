@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 // import components
 import Button from "../button/button.component";
 import CardDropdowmItem from "../card-dropdown-item/card-dropdown-item.component";
-import { DropdownContext } from "../../contexts/card-dropdown-context";
+import { DropdownContext } from "../../contexts/card-context";
 
 // import styles
 import {
@@ -18,7 +18,7 @@ import {
 // function component for card dropdown
 const CardDropdown = () => {
   // use product context
-  const { cardDropdownItems } = useContext(DropdownContext);
+  const { cardItems } = useContext(DropdownContext);
 
   // use navigate
   const navigate = useNavigate();
@@ -33,9 +33,9 @@ const CardDropdown = () => {
     <DropdownContainer>
       <DropdownItems>
         {/* check if there are items in the card dropdown */}
-        {cardDropdownItems.length ? (
+        {cardItems.length ? (
           // map through the items and render them
-          cardDropdownItems.map((item) => (
+          cardItems.map((item) => (
             <CardDropdowmItem key={item.id} dropdowmItem={item} />
           ))
         ) : (

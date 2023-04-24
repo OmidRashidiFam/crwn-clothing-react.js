@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 import { AuthUserContextProvider } from "./contexts/user-auth-context";
 import { CategoriesContextProvider } from "./contexts/categories-context";
-import { DropdownContextProvider } from "./contexts/card-dropdown-context";
+import { DropdownContextProvider } from "./contexts/card-context";
 
 import "./index.scss";
 

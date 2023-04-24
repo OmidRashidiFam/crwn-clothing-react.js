@@ -8,7 +8,7 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 
 // import contexts
 import { AuthUserContext } from "../../contexts/user-auth-context";
-import { DropdownContext } from "../../contexts/card-dropdown-context";
+import { DropdownContext } from "../../contexts/card-context";
 
 // import components
 import ShopingBagIcon from "../../components/shoping-bag-icon/shoping-bag-icon.component";
