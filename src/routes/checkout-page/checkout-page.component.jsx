@@ -1,6 +1,6 @@
 import { useEffect, useContext } from "react";
 
-import { DropdownContext } from "../../contexts/card-dropdown-context";
+import { DropdownContext } from "../../contexts/card.context";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 
 import {
@@ -12,8 +12,7 @@ import {
 
 const CheckoutPage = () => {
   // useing card dropdown context
-  const { cardDropdownItems, setIsVisible, total } =
-    useContext(DropdownContext);
+  const { cardItems, setIsVisible, cardTotal } = useContext(DropdownContext);
 
   // useing effect
   useEffect(() => {
@@ -40,11 +39,11 @@ const CheckoutPage = () => {
         </CheckoutBlock>
       </CheckoutHeader>
 
-      {cardDropdownItems.map((cardItem) => {
+      {cardItems.map((cardItem) => {
         return <CheckoutItem key={cardItem.id} cardItem={cardItem} />;
       })}
 
-      <Total>Total: {total}$</Total>
+      <Total>Total: {cardTotal}$</Total>
     </CheckoutContainer>
   );
 };

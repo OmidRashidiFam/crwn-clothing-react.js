@@ -5,7 +5,7 @@ import { GrClose } from "react-icons/gr";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
 // importing DropdownContext
-import { DropdownContext } from "../../contexts/card-dropdown-context";
+import { DropdownContext } from "../../contexts/card.context";
 
 // Importing style component
 import {
