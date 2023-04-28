@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 // import components
 import Button from "../button/button.component";
 import CardDropdowmItem from "../card-dropdown-item/card-dropdown-item.component";
-import { DropdownContext } from "../../contexts/card-context";
+import { DropdownContext } from "../../contexts/card.context";
 
 // import styles
 import {

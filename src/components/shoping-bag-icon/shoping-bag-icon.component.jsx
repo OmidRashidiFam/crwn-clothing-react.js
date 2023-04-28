@@ -2,7 +2,7 @@
 import { useContext } from "react";
 
 // Import components
-import { DropdownContext } from "../../contexts/card-context";
+import { DropdownContext } from "../../contexts/card.context";
 
 // Import style
 import {

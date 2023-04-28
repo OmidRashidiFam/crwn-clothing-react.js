@@ -1,6 +1,6 @@
 import { useEffect, useContext } from "react";
 
-import { DropdownContext } from "../../contexts/card-context";
+import { DropdownContext } from "../../contexts/card.context";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 
 import {
