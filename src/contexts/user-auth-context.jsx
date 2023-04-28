@@ -1,6 +1,9 @@
 // import useReducer, useEffect, createContext from react
 import { createContext, useReducer, useEffect } from "react";
 
+// import custom hook :)
+import { createAction } from "../utils/reducer/reducer.utils";
+
 // import onAuthStateChangeListener function from firebase
 import { onAuthStateChangeListener } from "../utils/firebase/firebase";
 
@@ -47,7 +50,7 @@ export const AuthUserContextProvider = ({ children }) => {
 
   // setCurrentUser function to update user state
   const setCurentUser = (user) => {
-    dispatch({ type: USER_ACTION_TYPE.SET_CURENT_USER, payload: user });
+    dispatch(createAction(USER_ACTION_TYPE.SET_CURENT_USER, user));
   };
 
   // set values to be passed by the context

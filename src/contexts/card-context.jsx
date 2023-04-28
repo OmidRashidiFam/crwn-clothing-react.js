@@ -1,6 +1,9 @@
 // import useReducer, createContext from react
 import { createContext, useReducer } from "react";
 
+// import custom hook :)
+import { createAction } from "../utils/reducer/reducer.utils";
+
 // Creating a context to store data which can be accessed globally throughout the app
 export const DropdownContext = createContext({
   isVisible: false,
@@ -119,10 +122,7 @@ export const DropdownContextProvider = ({ children }) => {
 
   // setIsVisible function action to update visiblelity of card dropdown
   const setIsVisible = (value) => {
-    dispatch({
-      type: CARD_DROPDOWN_ACTION_TYPE.SET_IS_VISIBLE,
-      payload: value,
-    });
+    dispatch(createAction(CARD_DROPDOWN_ACTION_TYPE.SET_IS_VISIBLE, value));
   };
 
   // updateCardItems function action to update cardItems, cardCount, cardTotal
@@ -137,14 +137,13 @@ export const DropdownContextProvider = ({ children }) => {
       0
     );
 
-    dispatch({
-      type: CARD_DROPDOWN_ACTION_TYPE.SET_CARD_ITEM,
-      payload: {
+    dispatch(
+      createAction(CARD_DROPDOWN_ACTION_TYPE.SET_CARD_ITEM, {
         cardItems: newCardItems,
         cardCount: newCount,
         cardTotal: newTotal,
-      },
-    });
+      })
+    );
   };
 
   // add item to card dropdown
