@@ -2,12 +2,15 @@
 import { useContext } from "react";
 // import react-router-dom packages
 import { Outlet } from "react-router-dom";
+// Import the useSelector hook from react-redux
+import { useSelector } from "react-redux";
+// Import the selectCurrentUser selector from the user.selector file
+import { selectCurentUser } from "../../store/user/user.selector";
 
 // import assets
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 
 // import contexts
-import { AuthUserContext } from "../../contexts/user-auth.context";
 import { DropdownContext } from "../../contexts/card.context";
 
 // import components
@@ -26,8 +29,8 @@ import {
 import { signOutUser } from "../../utils/firebase/firebase";
 
 const Navbar = () => {
-  // use context to access current user
-  const { curentUser } = useContext(AuthUserContext);
+  const curentUser = useSelector(selectCurentUser);
+
   // use context to set dropdown visibility state
   const { isVisible } = useContext(DropdownContext);
 
