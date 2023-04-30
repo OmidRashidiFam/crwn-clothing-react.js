@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { Outlet } from "react-router-dom";
 // Import the useSelector hook from react-redux
 import { useSelector } from "react-redux";
-// Import the selectCurrentUser selector from the user.selector file
+// Import the selectCurrentUser selector
 import { selectCurentUser } from "../../store/user/user.selector";
 
 // import assets

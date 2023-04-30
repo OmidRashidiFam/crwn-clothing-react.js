@@ -2,8 +2,8 @@
 import { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-// Import CategoriesContext context
-import { CategoriesContext } from "../../../contexts/categories.context";
+import { useSelector } from "react-redux";
+import { selectCategoriesMap } from "../../../store/categories/categories.selector";
 
 // Import necessary components
 import ProductCard from "../../../components/product-card/product-card.component";
@@ -16,8 +16,8 @@ const CategoryPage = () => {
   // Get the category name from the URL parameters
   const { categoryName } = useParams();
 
-  // Get the categories map from the context
-  const { categoriesMap } = useContext(CategoriesContext);
+  // Get the categories map from categories.selector
+  const categoriesMap = useSelector(selectCategoriesMap);
 
   // Set up state to store products
   const [products, setProducts] = useState([]);
