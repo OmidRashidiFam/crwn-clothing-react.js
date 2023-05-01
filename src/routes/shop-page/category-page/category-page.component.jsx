@@ -1,5 +1,5 @@
 // Import necessary components from react and react-router-dom
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import { useSelector } from "react-redux";
