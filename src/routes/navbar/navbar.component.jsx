@@ -26,7 +26,7 @@ import {
 } from "./navbar.style";
 
 // import utils
-import { signOutUser } from "../../utils/firebase/firebase";
+import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 const Navbar = () => {
   const curentUser = useSelector(selectCurentUser);

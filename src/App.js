@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import {
   onAuthStateChangeListener,
   createUserDocumentFromAuth,
-} from "./utils/firebase/firebase.js";
+} from "./utils/firebase/firebase.utils.js";
 
 // import all the component
 import Navbar from "./routes/navbar/navbar.component";

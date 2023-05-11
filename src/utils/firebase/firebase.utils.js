@@ -89,7 +89,7 @@ export const addCollectionAndDocument = async (collectionKey, objectsToAdd) => {
 };
 
 // get back the collections and documents from
-export const getCollectionAndDocument = async () => {
+export const getCategoriesArrAndDocument = async () => {
   // address for the collection
   const collectionRef = collection(db, "categories");
   // a query for the collection
