@@ -14,23 +14,23 @@ import { CategoryContainer, CategoryItems } from "./category-page.style";
 // Create a functional
 const CategoryPage = () => {
   // Get the category name from the URL parameters
-  const { categoryName } = useParams();
+  const { category } = useParams();
 
   // Get the categories map from categories.selector
   const categoriesMap = useSelector(selectCategoriesMap);
 
   // Set up state to store products
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(categoriesMap[category]);
 
   // Use effect hook to update the products state when the category name changes
   useEffect(() => {
-    setProducts(categoriesMap[categoryName]);
-  }, [categoryName, categoriesMap]);
+    setProducts(categoriesMap[category]);
+  }, [category, categoriesMap]);
 
   return (
     <CategoryContainer>
       <h2>
-        <span>{categoryName.toUpperCase()}</span>
+        <span>{category.toUpperCase()}</span>
       </h2>
       <CategoryItems>
         {products &&
