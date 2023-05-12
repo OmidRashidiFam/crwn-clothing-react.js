@@ -14,7 +14,7 @@ export const categoriesReducer = (
 
   // Execute switch statement depending on action type
   switch (type) {
-    case CATEGORIES_ACTION_TYPE.SET_CATEGORIES:
+    case CATEGORIES_ACTION_TYPE.SET_CATEGORIES_ARR:
       return { ...state, categoriesArr: payload };
     default:
       return state;
