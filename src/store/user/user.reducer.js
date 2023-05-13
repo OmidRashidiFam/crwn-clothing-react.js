@@ -6,7 +6,7 @@ const USER_INITIAL_STATE = {
 };
 
 // userReducer function to determine the type of user action
-export const userReducer = (state = USER_INITIAL_STATE, action) => {
+export const userReducer = (state = USER_INITIAL_STATE, action = {}) => {
   // destructure type and payload from action
   const { type, payload } = action;
 
@@ -16,6 +16,7 @@ export const userReducer = (state = USER_INITIAL_STATE, action) => {
       return {
         curentUser: payload,
       };
+
     default:
       return state;
   }
