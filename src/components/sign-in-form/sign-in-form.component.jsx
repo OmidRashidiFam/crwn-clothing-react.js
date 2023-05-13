@@ -10,7 +10,7 @@ import {
   signInWithGooglePopup,
   createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
-} from "../../utils/firebase/firebase";
+} from "../../utils/firebase/firebase.utils";
 
 // import styling components
 import { SigninContainer, BtnGroup } from "./sign-in-form.style";

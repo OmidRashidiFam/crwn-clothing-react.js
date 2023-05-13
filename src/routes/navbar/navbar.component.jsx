@@ -1,14 +1,15 @@
-// import modules from react
-import { useContext } from "react";
 // import react-router-dom packages
 import { Outlet } from "react-router-dom";
+// Import the useSelector hook from react-redux
+import { useSelector } from "react-redux";
+// Import the selectCurrentUser selector
+import { selectCurentUser } from "../../store/user/user.selector";
 
 // import assets
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 
-// import contexts
-import { AuthUserContext } from "../../contexts/user-auth.context";
-import { DropdownContext } from "../../contexts/card.context";
+// import selectIsVisible selector
+import { selectIsVisible } from "../../store/cart/cart.selector";
 
 // import components
 import ShopingBagIcon from "../../components/shoping-bag-icon/shoping-bag-icon.component";
@@ -23,13 +24,14 @@ import {
 } from "./navbar.style";
 
 // import utils
-import { signOutUser } from "../../utils/firebase/firebase";
+import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 const Navbar = () => {
-  // use context to access current user
-  const { curentUser } = useContext(AuthUserContext);
-  // use context to set dropdown visibility state
-  const { isVisible } = useContext(DropdownContext);
+  // Get the current user from the store
+  const curentUser = useSelector(selectCurentUser);
+
+  // Get the visibility status from the store
+  const isVisible = useSelector(selectIsVisible);
 
   // handler function to sign out user when clicked on sign out link
   const handleSignOut = async () => {

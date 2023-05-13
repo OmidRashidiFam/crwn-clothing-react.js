@@ -1,11 +1,17 @@
-// importing useContext
-import { useContext } from "react";
+// Import the useDispatch hook from react-redux
+import { useSelector, useDispatch } from "react-redux";
+
 // import icons from react-icons
 import { GrClose } from "react-icons/gr";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
-// importing DropdownContext
-import { DropdownContext } from "../../contexts/card.context";
+// import setIsVisible and addItemTocart action
+import {
+  addItemTocart,
+  removeItemFromcart,
+  deleteItemFromcart,
+} from "../../store/cart/cart.action";
+import { selectCartItems } from "../../store/cart/cart.selector";
 
 // Importing style component
 import {
@@ -20,13 +26,8 @@ import {
 
 // Creating component
 const CheckoutItem = ({ cardItem }) => {
-  // Using card dropdown context
-  const {
-    addItemToCardDropdown,
-    removeItemFromCardDropdown,
-    deleteItemFromCardDropdown,
-  } = useContext(DropdownContext);
-
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
   // Destructuring props
   const { imageUrl, price, quantity, name } = cardItem;
 
@@ -43,7 +44,7 @@ const CheckoutItem = ({ cardItem }) => {
         {/* This button will decrease the quantity of the product */}
         <button
           onClick={() => {
-            removeItemFromCardDropdown(cardItem);
+            dispatch(removeItemFromcart(cartItems, cardItem));
           }}
         >
           <AiOutlineLeft />
@@ -53,7 +54,7 @@ const CheckoutItem = ({ cardItem }) => {
         {/* This button will increase the quantity of the product */}
         <button
           onClick={() => {
-            addItemToCardDropdown(cardItem);
+            dispatch(addItemTocart(cartItems, cardItem));
           }}
         >
           <AiOutlineRight />
@@ -65,7 +66,7 @@ const CheckoutItem = ({ cardItem }) => {
       <RemoveButton>
         <button
           onClick={() => {
-            deleteItemFromCardDropdown(cardItem);
+            dispatch(deleteItemFromcart(cartItems, cardItem));
           }}
         >
           <GrClose className="value" />

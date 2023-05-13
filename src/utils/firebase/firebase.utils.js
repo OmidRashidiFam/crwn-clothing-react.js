@@ -89,22 +89,15 @@ export const addCollectionAndDocument = async (collectionKey, objectsToAdd) => {
 };
 
 // get back the collections and documents from
-export const getCollectionAndDocument = async () => {
+export const getCategoriesArrAndDocument = async () => {
   // address for the collection
   const collectionRef = collection(db, "categories");
   // a query for the collection
   const q = query(collectionRef);
   // get a snap shot
-  const querySnapShot = await getDocs(q);
-  // creating a new obj for the category collection
-  const categoryMap = querySnapShot.docs.reduce((acc, docSnapShot) => {
-    const { title, items } = docSnapShot.data();
-
-    acc[title.toLowerCase()] = items;
-    return acc;
-  }, {});
-
-  return categoryMap;
+  const querySnapShots = await getDocs(q);
+  // get and return snapshot data
+  return querySnapShots.docs.map((docSnapshot) => docSnapshot.data());
 };
 
 // create the user document
