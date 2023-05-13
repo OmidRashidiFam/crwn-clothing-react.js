@@ -1,8 +1,22 @@
-import { useEffect, useContext } from "react";
+// import useEffect hook from react
+import { useEffect } from "react";
 
-import { DropdownContext } from "../../contexts/card.context";
+// Import the useDispatch and useSelector hooks from react-redux
+import { useSelector, useDispatch } from "react-redux";
+
+// Import CheckoutItem component
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
 
+// import setIsVisible and addItemTocart action
+import { setIsVisible } from "../../store/cart/cart.action";
+
+// import selectCartItems and selectCartTotal selector
+import {
+  selectCartItems,
+  selectCartTotal,
+} from "../../store/cart/cart.selector";
+
+// import styled components
 import {
   CheckoutContainer,
   CheckoutHeader,
@@ -11,12 +25,16 @@ import {
 } from "./checkout-page.style";
 
 const CheckoutPage = () => {
-  // useing card dropdown context
-  const { cardItems, setIsVisible, cardTotal } = useContext(DropdownContext);
+  // Get the dispatch function from react-redux
+  const dispatch = useDispatch();
 
-  // useing effect
+  // Get the cart items and total from store selector
+  const cartItems = useSelector(selectCartItems);
+  const cartTotal = useSelector(selectCartTotal);
+
+  // useing effect to dispatch setIsVisible action
   useEffect(() => {
-    setIsVisible(false);
+    dispatch(setIsVisible(false));
   }, []);
 
   return (
@@ -39,11 +57,13 @@ const CheckoutPage = () => {
         </CheckoutBlock>
       </CheckoutHeader>
 
-      {cardItems.map((cardItem) => {
+      {/* Map through the cart items and render CheckoutItem component */}
+      {cartItems.map((cardItem) => {
         return <CheckoutItem key={cardItem.id} cardItem={cardItem} />;
       })}
 
-      <Total>Total: {cardTotal}$</Total>
+      {/* Render the total price of the cart items */}
+      <Total>Total: {cartTotal}$</Total>
     </CheckoutContainer>
   );
 };

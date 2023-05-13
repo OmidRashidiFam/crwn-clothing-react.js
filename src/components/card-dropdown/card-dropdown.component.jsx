@@ -1,12 +1,13 @@
-// import useContext from react
-import { useContext } from "react";
 // import useNavigate from react-router-dom
 import { useNavigate } from "react-router-dom";
+// Import the useSelector hook from react-redux
+import { useSelector } from "react-redux";
 
 // import components
 import Button from "../button/button.component";
 import CardDropdowmItem from "../card-dropdown-item/card-dropdown-item.component";
-import { DropdownContext } from "../../contexts/card.context";
+// import selectCartItems selector
+import { selectCartItems } from "../../store/cart/cart.selector";
 
 // import styles
 import {
@@ -18,7 +19,7 @@ import {
 // function component for card dropdown
 const CardDropdown = () => {
   // use product context
-  const { cardItems } = useContext(DropdownContext);
+  const cartItems = useSelector(selectCartItems);
 
   // use navigate
   const navigate = useNavigate();
@@ -33,9 +34,9 @@ const CardDropdown = () => {
     <DropdownContainer>
       <DropdownItems>
         {/* check if there are items in the card dropdown */}
-        {cardItems.length ? (
+        {cartItems.length ? (
           // map through the items and render them
-          cardItems.map((item) => (
+          cartItems.map((item) => (
             <CardDropdowmItem key={item.id} dropdowmItem={item} />
           ))
         ) : (

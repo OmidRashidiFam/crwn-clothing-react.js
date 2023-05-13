@@ -1,8 +1,14 @@
-// import modules from react
-import { useContext } from "react";
+// Import the useSelector hook from react-redux
+import { useSelector, useDispatch } from "react-redux";
 
-// Import components
-import { DropdownContext } from "../../contexts/card.context";
+// import selectIsVisible, and selectCartCount selector
+import {
+  selectIsVisible,
+  selectCartCount,
+} from "../../store/cart/cart.selector";
+
+// import setIsVisible action
+import { setIsVisible } from "../../store/cart/cart.action";
 
 // Import style
 import {
@@ -13,12 +19,15 @@ import {
 
 // Main component for the shoping bag icon
 const ShopingBagIcon = () => {
-  // Use dropdown context to access isVisible and setIsVisible state variables and cardDropdownItemsCount
-  const { isVisible, setIsVisible, cardCount } = useContext(DropdownContext);
+  // Get the visibility status from the store
+  const isVisible = useSelector(selectIsVisible);
+  // Get the visibility status from the store
+  const cardCount = useSelector(selectCartCount);
 
-  // Handeler function to toggle the visibility of the dropdown
+  // Handeler function to toggle the visibility of the cart using dispatch
+  const dispatch = useDispatch();
   const toggleIsVisible = () => {
-    setIsVisible(!isVisible);
+    dispatch(setIsVisible(!isVisible));
   };
 
   return (

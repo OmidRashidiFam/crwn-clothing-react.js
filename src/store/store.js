@@ -11,7 +11,7 @@ const customLogger = (store) => (next) => (action) => {
 
   console.log("action type: ", action.type);
   console.log("action payload: ", action.payload);
-  console.log(" prev state: ", store.getState());
+  console.log("prev state: ", store.getState());
 
   next(action);
 

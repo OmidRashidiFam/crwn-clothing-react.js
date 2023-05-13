@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 
 import App from "./App";
 import { store } from "./store/store";
-import { DropdownContextProvider } from "./contexts/card.context";
 
 import "./index.scss";
 
@@ -13,9 +12,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
     <Provider store={store}>
-      <DropdownContextProvider>
-        <App />
-      </DropdownContextProvider>
+      <App />
     </Provider>
   </Router>
 );

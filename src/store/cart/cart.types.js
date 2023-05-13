@@ -1,0 +1,4 @@
+export const CART_ACTION_TYPE = {
+  SET_IS_VISIBIL: "cart/SET_IS_VISIBIL",
+  SET_CART_ITEM: "cart/SET_CART_ITEM",
+};

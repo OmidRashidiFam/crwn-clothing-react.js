@@ -1,10 +1,14 @@
-// import useContext from react
-import { useContext } from "react";
 // import components
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
-// import DropdownContext
-import { DropdownContext } from "../../contexts/card.context";
+// Import the useDispatch hook from react-redux
+import { useSelector, useDispatch } from "react-redux";
+
+// import selectIsVisible, and selectCartCount selector
+import { selectCartItems } from "../../store/cart/cart.selector";
+
+// import setIsVisible and addItemTocart action
+import { setIsVisible, addItemTocart } from "../../store/cart/cart.action";
 
 // import style
 import {
@@ -19,15 +23,15 @@ const ProductCard = ({ product }) => {
   // destucture from product
   const { name, price, imageUrl } = product;
 
-  // use card dropdown contex
-  const { setIsVisible, addItemToCardDropdown } = useContext(DropdownContext);
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
 
   // handler function to add product to card dropdown
   const addProductToCardDropdown = () => {
     // set dropdown visibility to true
-    setIsVisible(true);
+    dispatch(setIsVisible(true));
     // add product to card dropdown
-    addItemToCardDropdown(product);
+    dispatch(addItemTocart(cartItems, product));
   };
 
   return (
